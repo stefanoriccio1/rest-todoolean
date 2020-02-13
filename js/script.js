@@ -11,8 +11,9 @@ $('#insert').click(function(){
 
 $(document).on('click', '.delete', function(){
   var thisButton = $(this);
-  
-  thisButton.parent().html('');
+
+  // console.log(thisButton.parent().attr('data-id'));
+  deleteData(thisButton.parent().attr('data-id'))
 })
 });
 
