@@ -22,8 +22,15 @@ $(document).on('click', '.delete', function(){
   // console.log(thisButton.parent().attr('data-id'));
 
   deleteData(idNumber);
+});
 
-})
+$(document).on('click', '.modify', function(){
+
+  var thisElement = $(this);
+
+  console.log(thisElement.siblings().val());
+  // updateData(modifica);
+});
 });
 
 // FUNCTIONS------------->
@@ -106,3 +113,19 @@ function emptyFields(){
 }
 
 // funzione di update
+
+function updateData(val){
+  $.ajax({
+    url: "http://157.230.17.132:3031/todos",
+    method: "PATCH",
+    data: {
+      text: val,
+     },
+    success: function (data) {
+      emptyFields();
+      printData();
+     },
+    error: function (richiesta, stato, errori) {
+       alert("E' avvenuto un errore. " + errore); }
+  });
+}
