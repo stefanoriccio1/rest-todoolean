@@ -1,6 +1,13 @@
 // alert('ciao');
 $(document).ready(function(){
 printData()
+
+$('#insert').click(function(){
+  var input = $('#achievment').val();
+  $('.todolist').html('');
+  postData(input);
+  printData();
+})
 });
 
 // FUNCTIONS------------->
@@ -17,7 +24,8 @@ function printData (){
       for (var i = 0; i < data.length; i++) {
         var toDo = data[i];
         var context = {
-          text: toDo.text
+          text: toDo.text,
+          id: toDo.id,
         };
         var html = template(context);
         $('.todolist').append(html);
@@ -45,11 +53,12 @@ function getData(){
 }
 
 // funzione per pushare i dati
-function postData(nomeUtente){
+function postData(value){
   $.ajax({
     url: "http://157.230.17.132:3031/todos",
     method: "POST",
     data: {
+      text: value,
      },
     success: function (data) {
       console.log(data);

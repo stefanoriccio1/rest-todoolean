@@ -12,12 +12,14 @@
   </head>
   <body>
     <div class="container">
+      <input type="text" id="achievment" value="" placeholder="Cosa devi fare?">
+      <button id="insert">Inserisci</button>
       <ul class="todolist">
 
       </ul>
     </div>
     <script id="entry-template" type="text/x-handlebars-template">
-      <li class= "todo">
+      <li class= "todo" data-id= "{{id}}">
         {{text}}
       </li>
     </script>
