@@ -28,6 +28,16 @@ $(document).ready(function(){
 
     updateData(idNumberNew, updatedElement);
   });
+
+    $(document).on('keypress', '.modifica_testo', function(event){
+   if(event.which == 13){
+     var thisElement = $(this);
+     var updatedElement = thisElement.val();
+     var idNumberNew = thisElement.parent().parent().attr('data-id');
+
+     updateData(idNumberNew, updatedElement);
+   }
+  });
 });
 
 // FUNCTIONS------------->
@@ -128,4 +138,4 @@ function updateData(id, val){
     error: function (richiesta, stato, errori) {
        alert("E' avvenuto un errore. " + errore); }
   });
-}
+};
