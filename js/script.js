@@ -7,6 +7,12 @@ $('#insert').click(function(){
   $('.todolist').html('');
   postData(input);
   printData();
+});
+
+$(document).on('click', '.delete', function(){
+  var thisButton = $(this);
+  
+  thisButton.parent().html('');
 })
 });
 
