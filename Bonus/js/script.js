@@ -1,36 +1,33 @@
 // alert('ciao');
 $(document).ready(function(){
-printData()
+  printData()
 
-$('#insert').click(function(){
-  var input = $('#achievment').val();
+  $('#insert').click(function(){
+    var input = $('#achievment').val();
+    postData(input);
+  });
 
-  postData(input);
-});
+  $('#achievment').keypress(function(event){
+   if(event.which == 13){
+     var input = $('#achievment').val();
+     postData(input);
+   }
+  });
 
-$('#achievment').keypress(function(event){
- if(event.which == 13){
-   var input = $('#achievment').val();
-   postData(input);
- }
-});
+  $(document).on('click', '.delete', function(){
+    var thisButton = $(this);
+    var idNumber = thisButton.parent().attr('data-id');
 
-$(document).on('click', '.delete', function(){
-  var thisButton = $(this);
-  var idNumber = thisButton.parent().attr('data-id');
-  console.log(idNumber);
-  // console.log(thisButton.parent().attr('data-id'));
+    deleteData(idNumber);
+  });
 
-  deleteData(idNumber);
-});
+  $(document).on('click', '.modify', function(){
+    var thisElement = $(this);
+    var updatedElement = thisElement.siblings().val();
+    var idNumberNew = thisElement.parent().parent().attr('data-id');
 
-$(document).on('click', '.modify', function(){
-  var thisElement = $(this);
-  var updatedElement = thisElement.siblings().val();
-  var idNumberNew = thisElement.parent().parent().attr('data-id');
-
-  updateData(idNumberNew, updatedElement);
-});
+    updateData(idNumberNew, updatedElement);
+  });
 });
 
 // FUNCTIONS------------->
@@ -110,7 +107,7 @@ function deleteData(id){
 function emptyFields(){
   $('#achievment').val('');
   $('.todolist').html('');
-  $('.modifica_testo').val('')
+  $('.modifica_testo').val('');
 }
 
 // funzione di update
