@@ -25,11 +25,11 @@ $(document).on('click', '.delete', function(){
 });
 
 $(document).on('click', '.modify', function(){
-
   var thisElement = $(this);
+  var updatedElement = thisElement.siblings().val();
+  var idNumberNew = thisElement.parent().parent().attr('data-id');
 
-  console.log(thisElement.siblings().val());
-  // updateData(modifica);
+  updateData(idNumberNew, updatedElement);
 });
 });
 
@@ -110,20 +110,23 @@ function deleteData(id){
 function emptyFields(){
   $('#achievment').val('');
   $('.todolist').html('');
+  $('.modifica_testo').val('')
 }
 
 // funzione di update
 
-function updateData(val){
+function updateData(id, val){
   $.ajax({
-    url: "http://157.230.17.132:3031/todos",
+    url: "http://157.230.17.132:3031/todos/" + id,
     method: "PATCH",
     data: {
       text: val,
      },
     success: function (data) {
-      emptyFields();
-      printData();
+      if (val != ''){
+        emptyFields();
+        printData();
+      }
      },
     error: function (richiesta, stato, errori) {
        alert("E' avvenuto un errore. " + errore); }
